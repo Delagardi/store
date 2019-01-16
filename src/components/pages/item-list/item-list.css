@@ -1,3 +1,7 @@
+.order-list-header {
+  margin: 2rem 0;
+}
+
 table.order-list {
   width: 100%;
 }
@@ -5,4 +9,23 @@ table.order-list {
 table.order-list th, table.order-list td {
   border-top: #ccc 1px solid;
   padding: 10px;
+}
+
+table .order-item-link {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+.ion-md-remove-circle-outline {
+  color: rgb(205, 205, 11);
+}
+
+.ion-md-add-circle-outline {
+  color: rgb(3, 149, 3);
+}
+
+.ion-md-close-circle-outline {
+  color: rgb(214, 3, 3);
 }
