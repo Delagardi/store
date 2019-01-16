@@ -22,7 +22,7 @@ const Frontpage = () => {
           <img height="200" src={book2} alt="The Hero with a Thousand Faces " />
         </div>
         <div className="item-data">
-          <h3>The Hero with a Thousand Faces </h3>
+          <h3>The Hero with a Thousand Faces</h3>
           <span>Joseph Campbell</span>
           <span className="item-price d-block">$43</span>
         </div>

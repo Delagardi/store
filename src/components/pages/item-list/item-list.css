@@ -1,0 +1,8 @@
+table.order-list {
+  width: 100%;
+}
+
+table.order-list th, table.order-list td {
+  border-top: #ccc 1px solid;
+  padding: 10px;
+}
