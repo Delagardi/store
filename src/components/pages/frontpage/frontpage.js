@@ -4,7 +4,7 @@ import './frontpage.css';
 import book1 from '../../../upload/book-preview/sapiens.jpg';
 import book2 from '../../../upload/book-preview/hero faces.jpg';
 
-const Frontpage = () => {
+const Frontpage = ({ onAddToCart }) => {
   return(
     <div className="container">
       <div className="item d-flex">
@@ -15,6 +15,9 @@ const Frontpage = () => {
           <h3>Sapiens: A Brief History of Humankind</h3>
           <span>Yuval Noah Harari</span>
           <span className="item-price d-block">$34</span>
+          <button 
+            className="btn btn-success"
+            onClick={onAddToCart}>Add to cart</button>
         </div>
       </div>
       <div className="item d-flex">
@@ -25,6 +28,9 @@ const Frontpage = () => {
           <h3>The Hero with a Thousand Faces</h3>
           <span>Joseph Campbell</span>
           <span className="item-price d-block">$43</span>
+          <button 
+            className="btn btn-success"
+            onClick={onAddToCart}>Add to cart</button>
         </div>
       </div>
     </div>
