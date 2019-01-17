@@ -2,7 +2,10 @@ import React from 'react';
 
 import './item-list.css';
 
-const ItemList = () => {
+const ItemList = ({ customerBooks, booksData }) => {
+  console.log('Customer Books id (list):');
+  console.log(customerBooks);
+
   return (
     <div className="container">
       <h3 className="order-list-header">Your order</h3>

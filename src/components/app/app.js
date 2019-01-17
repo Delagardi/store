@@ -31,13 +31,13 @@ class App extends Component {
   
   onAddToCart = (id) => {
     let buffer = this.state.itemsNumber + 1;
-    let newBookId = id;
-    console.log(id);
+    let newBook = this.state.booksData.filter( (item) => item.id === id );
+    console.log(newBook);
 
     this.setState( ({ customerBooks }) => {
       const newCustomerBooks = [
         ...customerBooks,
-        newBookId
+        newBook
       ]
   
       return {
@@ -48,9 +48,7 @@ class App extends Component {
   }
 
   render() {
-    const { itemsNumber, booksData } = this.state;
-    console.log('Customer Books id:');
-    console.log(this.state.customerBooks);
+    const { itemsNumber, customerBooks, booksData  } = this.state;
 
     return (
     <div className="container">
@@ -61,7 +59,10 @@ class App extends Component {
         onAddToCart={this.onAddToCart}
         booksData={booksData}
       />
-      <ItemList/>
+      <ItemList
+        customerBooks={customerBooks}
+        booksData={booksData}
+      />
     </div>
     )
   }
