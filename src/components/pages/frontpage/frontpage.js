@@ -19,7 +19,7 @@ const Frontpage = ({ onAddToCart, booksData }) => {
           <span className="item-price d-block">{price}</span>
           <button 
             className="btn btn-success"
-            onClick={onAddToCart}>Add to cart</button>
+            onClick={() => onAddToCart(id)}>Add to cart</button>
         </div>
       </div>
     );

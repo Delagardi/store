@@ -24,20 +24,33 @@ class App extends Component {
           imageSource: 'hero-faces.jpg'
         },
       ],
+      customerBooks: [],
       itemsNumber: 0
     }
   }
   
-  onAddToCart = () => {
+  onAddToCart = (id) => {
     let buffer = this.state.itemsNumber + 1;
-    
-    this.setState({
-      itemsNumber: buffer
-    });
+    let newBookId = id;
+    console.log(id);
+
+    this.setState( ({ customerBooks }) => {
+      const newCustomerBooks = [
+        ...customerBooks,
+        newBookId
+      ]
+  
+      return {
+        itemsNumber: buffer,
+        customerBooks: newCustomerBooks
+      }
+    })
   }
 
   render() {
     const { itemsNumber, booksData } = this.state;
+    console.log('Customer Books id:');
+    console.log(this.state.customerBooks);
 
     return (
     <div className="container">
