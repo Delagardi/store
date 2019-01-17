@@ -1,38 +1,34 @@
 import React from 'react';
 
 import './frontpage.css';
-import book1 from '../../../upload/book-preview/sapiens.jpg';
-import book2 from '../../../upload/book-preview/hero faces.jpg';
 
-const Frontpage = ({ onAddToCart }) => {
+const Frontpage = ({ onAddToCart, booksData }) => {
+  const items = booksData.map( (item) => {
+    const { id, name, author, price, imageSource } = item;
+    console.log(`%PUBLIC_URL%/${imageSource}`);
+    
+    return (
+      <div 
+        key={id}
+        className="item d-flex">
+        <div className="item-img">
+          <img height="200" src={require(`../../../upload/book-preview/${imageSource}`)} alt={name} />
+        </div>
+        <div className="item-data">
+          <h3>{name}</h3>
+          <span>{author}</span>
+          <span className="item-price d-block">{price}</span>
+          <button 
+            className="btn btn-success"
+            onClick={onAddToCart}>Add to cart</button>
+        </div>
+      </div>
+    );
+  });
+
   return(
     <div className="container">
-      <div className="item d-flex">
-        <div className="item-img">
-          <img height="200" src={book1} alt="Sapiens: A Brief History of Humankind" />
-        </div>
-        <div className="item-data">
-          <h3>Sapiens: A Brief History of Humankind</h3>
-          <span>Yuval Noah Harari</span>
-          <span className="item-price d-block">$34</span>
-          <button 
-            className="btn btn-success"
-            onClick={onAddToCart}>Add to cart</button>
-        </div>
-      </div>
-      <div className="item d-flex">
-        <div className="item-img">
-          <img height="200" src={book2} alt="The Hero with a Thousand Faces " />
-        </div>
-        <div className="item-data">
-          <h3>The Hero with a Thousand Faces</h3>
-          <span>Joseph Campbell</span>
-          <span className="item-price d-block">$43</span>
-          <button 
-            className="btn btn-success"
-            onClick={onAddToCart}>Add to cart</button>
-        </div>
-      </div>
+      {items}
     </div>
   );
 }

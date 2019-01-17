@@ -8,6 +8,22 @@ class App extends Component {
     super();
 
     this.state = {
+      booksData: [
+        {
+          id: 321,
+          name: "Sapiens: A Brief History of Humankind",
+          author: "Yuval Noah Harari",
+          price: "$34",
+          imageSource: 'sapiens.jpg'
+        },
+        {
+          id: 322,
+          name: "The Hero with a Thousand Faces",
+          author: "Joseph Campbell",
+          price: "$43",
+          imageSource: 'hero-faces.jpg'
+        },
+      ],
       itemsNumber: 0
     }
   }
@@ -21,13 +37,17 @@ class App extends Component {
   }
 
   render() {
-    const { itemsNumber } = this.state;
-    console.log(itemsNumber);
+    const { itemsNumber, booksData } = this.state;
 
     return (
     <div className="container">
-      <Header itemsNumber={itemsNumber}/>
-      <Frontpage onAddToCart={this.onAddToCart}/>
+      <Header 
+        itemsNumber={itemsNumber}
+      />
+      <Frontpage 
+        onAddToCart={this.onAddToCart}
+        booksData={booksData}
+      />
       <ItemList/>
     </div>
     )
