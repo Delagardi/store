@@ -5,14 +5,13 @@ import './frontpage.css';
 const Frontpage = ({ onAddToCart, booksData }) => {
   const items = booksData.map( (item) => {
     const { id, name, author, price, imageSource } = item;
-    console.log(`%PUBLIC_URL%/${imageSource}`);
     
     return (
       <div 
         key={id}
         className="item d-flex">
         <div className="item-img">
-          <img height="200" src={require(`../../../upload/book-preview/${imageSource}`)} alt={name} />
+          <img height="200" src={`/book-preview/${imageSource}`} alt={name} />
         </div>
         <div className="item-data">
           <h3>{name}</h3>
