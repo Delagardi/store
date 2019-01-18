@@ -2,13 +2,13 @@ import React from 'react';
 
 import './item-list.css';
 
-const ItemList = ({ customerBooks, booksData }) => {
+const ItemList = ({ customerBooks }) => {
   const items = customerBooks.map( (item) => {
     const { key, name, price, count } = item;
 
     return (
       <tr key={key}>
-        <td>1</td>
+        <td>{key}</td>
         <td>{name}</td>
         <td>{count}</td>
         <td>{price}</td>

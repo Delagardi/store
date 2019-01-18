@@ -7,7 +7,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.CustomerBookID = 100;
+    this.CustomerBookKEY = 1;
 
     this.state = {
       booksData: [
@@ -24,6 +24,13 @@ class App extends Component {
           author: "Joseph Campbell",
           price: "$43",
           imageSource: 'hero-faces.jpg'
+        },
+        {
+          id: 323,
+          name: "Some third test book",
+          author: "Joseph Noah",
+          price: "$143",
+          imageSource: 'sapiens.jpg'
         },
       ],
       customerBooks: [],
@@ -50,7 +57,7 @@ class App extends Component {
 
     } else {
       newBook.count = 1;
-      newBook.key = this.CustomerBookID++;
+      newBook.key = this.CustomerBookKEY++;
 
       this.setState( ({ customerBooks }) => {
         const newCustomerBooks = [
