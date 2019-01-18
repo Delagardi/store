@@ -2,7 +2,12 @@ import React from 'react';
 
 import './item-list.css';
 
-const ItemList = ({ customerBooks, onRemove }) => {
+const ItemList = ({ 
+  customerBooks, 
+  onRemove, 
+  onAdd, 
+  onDelete 
+}) => {
   const items = customerBooks.map( (item, index) => {
     const { id, name, price, count } = item;
     index += 1;
@@ -15,11 +20,20 @@ const ItemList = ({ customerBooks, onRemove }) => {
         <td>
           <button
             onClick={ () => onRemove(id) }
-            className="order-item-link d-block" href="remove">
+            className="order-item-button d-block" href="remove">
             <i className="icon d-inline-block ion-md-remove-circle-outline"></i>
           </button>
-          <button className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-add-circle-outline"></i></button>
-          <button className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-close-circle-outline"></i></button>
+          <button
+            onClick={ () => onAdd(id) }
+            className="order-item-button d-block" href="remove">
+            <i className="icon d-inline-block ion-md-add-circle-outline">
+            </i>
+          </button>
+          <button
+            onClick={ () => onDelete(id) }
+            className="order-item-button d-block" href="remove">
+            <i className="icon d-inline-block ion-md-close-circle-outline"></i>
+          </button>
         </td>
       </tr>
     );
