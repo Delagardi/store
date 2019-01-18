@@ -3,8 +3,23 @@ import React from 'react';
 import './item-list.css';
 
 const ItemList = ({ customerBooks, booksData }) => {
-  console.log('Customer Books id (list):');
-  console.log(customerBooks);
+  const items = customerBooks.map( (item) => {
+    const { key, name, price, count } = item;
+
+    return (
+      <tr key={key}>
+        <td>1</td>
+        <td>{name}</td>
+        <td>{count}</td>
+        <td>{price}</td>
+        <td>
+          <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-remove-circle-outline"></i></a>
+          <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-add-circle-outline"></i></a>
+          <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-close-circle-outline"></i></a>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <div className="container">
@@ -20,28 +35,7 @@ const ItemList = ({ customerBooks, booksData }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Sapiens: A Brief History of Humankind</td>
-            <td>1</td>
-            <td>$34</td>
-            <td>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-remove-circle-outline"></i></a>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-add-circle-outline"></i></a>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-close-circle-outline"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>The Hero with a Thousand Faces</td>
-            <td>1</td>
-            <td>$43</td>
-            <td>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-remove-circle-outline"></i></a>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-add-circle-outline"></i></a>
-              <a className="order-item-link d-block" href="remove"><i className="icon d-inline-block ion-md-close-circle-outline"></i></a>
-            </td>
-          </tr>
+          {items}
         </tbody>
       </table>
     </div>

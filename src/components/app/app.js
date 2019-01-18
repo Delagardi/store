@@ -7,6 +7,8 @@ class App extends Component {
   constructor() {
     super();
 
+    this.CustomerBookID = 100;
+
     this.state = {
       booksData: [
         {
@@ -30,21 +32,38 @@ class App extends Component {
   }
   
   onAddToCart = (id) => {
-    let buffer = this.state.itemsNumber + 1;
-    let newBook = this.state.booksData.filter( (item) => item.id === id );
-    console.log(newBook);
+    const { itemsNumber, booksData, customerBooks } = this.state;
+    const itemsCount = itemsNumber + 1;
+    const newBook = booksData.find( (item) => item.id === id );
+    const isOld = customerBooks.findIndex( (item) => item.id === id );
 
-    this.setState( ({ customerBooks }) => {
-      const newCustomerBooks = [
-        ...customerBooks,
-        newBook
-      ]
-  
-      return {
-        itemsNumber: buffer,
-        customerBooks: newCustomerBooks
-      }
-    })
+    if (isOld > -1) {      
+      const oldBookIndex = customerBooks.findIndex( (item) => item.id === id );
+
+      const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
+      stateCopy[oldBookIndex].count++;
+
+      this.setState({
+        itemsNumber: itemsCount,
+        customerBooks: stateCopy
+      });
+
+    } else {
+      newBook.count = 1;
+      newBook.key = this.CustomerBookID++;
+
+      this.setState( ({ customerBooks }) => {
+        const newCustomerBooks = [
+          ...customerBooks,
+          newBook
+        ]
+    
+        return {
+          itemsNumber: itemsCount,
+          customerBooks: newCustomerBooks
+        }
+      })
+    }
   }
 
   render() {
