@@ -42,6 +42,11 @@ class App extends Component {
     const index = customerBooks.findIndex( (item) => item.id === id );
     const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
 
+    if (stateCopy[index].count === 1) {
+      console.log('DELETE THIS SHIT')
+      return this.onDelete(id);
+    }
+
     stateCopy[index].count--;
 
     this.setState({
