@@ -7,8 +7,6 @@ class App extends Component {
   constructor() {
     super();
 
-    this.CustomerBookKEY = 1;
-
     this.state = {
       booksData: [
         {
@@ -57,7 +55,6 @@ class App extends Component {
 
     } else {
       newBook.count = 1;
-      newBook.key = this.CustomerBookKEY++;
 
       this.setState( ({ customerBooks }) => {
         const newCustomerBooks = [

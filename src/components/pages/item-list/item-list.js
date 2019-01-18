@@ -4,10 +4,10 @@ import './item-list.css';
 
 const ItemList = ({ customerBooks }) => {
   const items = customerBooks.map( (item, index) => {
-    const { key, name, price, count } = item;
+    const { id, name, price, count } = item;
     index += 1;
     return (
-      <tr key={key}>
+      <tr key={id}>
         <td>{index}</td>
         <td>{name}</td>
         <td>{count}</td>
