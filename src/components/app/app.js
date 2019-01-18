@@ -35,6 +35,21 @@ class App extends Component {
       itemsNumber: 0
     }
   }
+
+  onRemove = (id) => {
+    const { itemsNumber, customerBooks } = this.state;
+    const itemsCount = itemsNumber - 1;
+    const index = customerBooks.findIndex( (item) => item.id === id );
+    console.log('ID:' + id)
+    const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
+
+    stateCopy[index].count--;
+
+    this.setState({
+      itemsNumber: itemsCount,
+      customerBooks: stateCopy
+    })
+  }
   
   onAddToCart = (id) => {
     const { itemsNumber, booksData, customerBooks } = this.state;
@@ -83,6 +98,7 @@ class App extends Component {
         booksData={booksData}
       />
       <ItemList
+        onRemove={this.onRemove}
         customerBooks={customerBooks}
         booksData={booksData}
       />

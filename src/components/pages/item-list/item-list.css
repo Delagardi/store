@@ -16,6 +16,9 @@ table .order-item-link {
   width: 1.5rem;
   float: left;
   margin-right: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .ion-md-remove-circle-outline {
