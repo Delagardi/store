@@ -2,33 +2,21 @@ import React, { Component } from 'react';
 import Frontpage from '../pages/frontpage';
 import OrderList from '../pages/order-list';
 import Header from '../pages/header';
+import ServiceBookstore from '../../services/service-bookstore';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      booksData: [
-        {
-          id: 321,
-          name: "Sapiens: A Brief History of Humankind",
-          author: "Yuval Noah Harari",
-          price: 5,
-          imageSource: 'sapiens.jpg'
-        },
-        {
-          id: 322,
-          name: "The Hero with a Thousand Faces",
-          author: "Joseph Campbell",
-          price: 10,
-          imageSource: 'hero-faces.jpg'
-        }
-      ],
+      booksData: [],
       customerBooks: [],
       itemsNumber: 0,
       orderSum: 0
     }
   }
+
+  serviceBookstore = new ServiceBookstore();
 
   onRemove = (id) => {
     const { itemsNumber, customerBooks, orderSum } = this.state;
@@ -125,6 +113,16 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.serviceBookstore
+      .getBooks()
+      .then( (booksData) => {
+        this.setState({
+          booksData: booksData
+        });
+      });
+  }
+  
   render() {
     const { itemsNumber, customerBooks, booksData, orderSum  } = this.state;
 
