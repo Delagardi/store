@@ -1,0 +1,45 @@
+
+.order-item-button {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  float: left;
+  margin-right: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.order-item-button:focus {
+  outline: none;
+}
+
+.ion-md-remove-circle-outline {
+  color: rgb(205, 205, 11);
+}
+
+.ion-md-remove-circle-outline:hover,
+.ion-md-remove-circle-outline:focus,
+.ion-md-remove-circle-outline:active {
+  color: rgb(223, 223, 14);
+}
+
+.ion-md-add-circle-outline {
+  color: rgb(3, 149, 3);
+}
+
+.ion-md-add-circle-outline:hover,
+.ion-md-add-circle-outline:focus,
+.ion-md-add-circle-outline:active {
+  color: rgb(5, 172, 5);
+}
+
+.ion-md-close-circle-outline {
+  color: rgb(214, 3, 3);
+}
+
+.ion-md-close-circle-outline:hover,
+.ion-md-close-circle-outline:focus,
+.ion-md-close-circle-outline:active {
+  color: rgb(253, 24, 24);
+}

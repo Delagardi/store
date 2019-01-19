@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './order-item.css';
+
 const OrderItem = (props) => {
   const {
     id, 
@@ -17,7 +19,7 @@ const OrderItem = (props) => {
       <td>{index}</td>
       <td>{name}</td>
       <td>{count}</td>
-      <td>{price}</td>
+      <td>${price}</td>
       <td>
         <button
           onClick={ () => onRemove(id) }

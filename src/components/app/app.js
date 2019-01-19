@@ -13,60 +13,67 @@ class App extends Component {
           id: 321,
           name: "Sapiens: A Brief History of Humankind",
           author: "Yuval Noah Harari",
-          price: "$34",
+          price: 5,
           imageSource: 'sapiens.jpg'
         },
         {
           id: 322,
           name: "The Hero with a Thousand Faces",
           author: "Joseph Campbell",
-          price: "$43",
+          price: 10,
           imageSource: 'hero-faces.jpg'
         }
       ],
       customerBooks: [],
-      itemsNumber: 0
+      itemsNumber: 0,
+      orderSum: 0
     }
   }
 
   onRemove = (id) => {
-    const { itemsNumber, customerBooks } = this.state;
+    const { itemsNumber, customerBooks, orderSum } = this.state;
     const itemsCount = itemsNumber - 1;
     const index = customerBooks.findIndex( (item) => item.id === id );
-    const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
+    const customerBooksCopy =  JSON.parse(JSON.stringify(customerBooks));
+    const orderSumNumber = orderSum - customerBooks[index].price;
 
-    if (stateCopy[index].count === 1) {
-      console.log('DELETE THIS SHIT')
+
+    if (customerBooksCopy[index].count === 1) {
       return this.onDelete(id);
     }
 
-    stateCopy[index].count--;
+    customerBooksCopy[index].count--;
 
     this.setState({
       itemsNumber: itemsCount,
-      customerBooks: stateCopy
+      customerBooks: customerBooksCopy,
+      orderSum: orderSumNumber
     })
   }
   
   onAdd = (id) => {
-    const { itemsNumber, customerBooks } = this.state;
+    const { itemsNumber, customerBooks, orderSum } = this.state;
     const itemsCount = itemsNumber + 1;
     const index = customerBooks.findIndex( (item) => item.id === id );
-    const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
+    const customerBooksCopy =  JSON.parse(JSON.stringify(customerBooks));
+    const orderSumNumber = orderSum + customerBooksCopy[index].price;
 
-    stateCopy[index].count++;
+    customerBooksCopy[index].count++;
 
     this.setState({
       itemsNumber: itemsCount,
-      customerBooks: stateCopy
+      customerBooks: customerBooksCopy,
+      orderSum: orderSumNumber
     });
   }
 
   onDelete = (id) => {
-    this.setState(({ itemsNumber, customerBooks }) => {
+    this.setState(({ itemsNumber, customerBooks, orderSum }) => {
       const index = customerBooks.findIndex( (item) => item.id === id );
-      const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
-      const itemsCount = itemsNumber - stateCopy[index].count;
+      const customerBooksCopy =  JSON.parse(JSON.stringify(customerBooks));
+      const itemsCount = itemsNumber - customerBooksCopy[index].count;
+      const orderSumNumber = orderSum - customerBooks[index].price * customerBooks[index].count;
+
 
       const newCustomerBooks = [
         ...customerBooks.slice(0, index),
@@ -75,26 +82,29 @@ class App extends Component {
 
       return {
         itemsNumber: itemsCount,
-        customerBooks: newCustomerBooks
+        customerBooks: newCustomerBooks,
+        orderSum: orderSumNumber
       }
     });
   }
 
   onAddToCart = (id) => {
-    const { itemsNumber, booksData, customerBooks } = this.state;
+    const { itemsNumber, booksData, customerBooks, orderSum } = this.state;
     const itemsCount = itemsNumber + 1;
     const newBook = booksData.find( (item) => item.id === id );
     const isOld = customerBooks.findIndex( (item) => item.id === id );
+    const orderSumNumber = orderSum + newBook.price;
+
 
     if (isOld > -1) {      
       const oldBookIndex = customerBooks.findIndex( (item) => item.id === id );
-
-      const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
-      stateCopy[oldBookIndex].count++;
+      const customerBooksCopy =  JSON.parse(JSON.stringify(customerBooks));
+      customerBooksCopy[oldBookIndex].count++;
 
       this.setState({
         itemsNumber: itemsCount,
-        customerBooks: stateCopy
+        customerBooks: customerBooksCopy,
+        orderSum: orderSumNumber
       });
 
     } else {
@@ -108,19 +118,21 @@ class App extends Component {
     
         return {
           itemsNumber: itemsCount,
-          customerBooks: newCustomerBooks
+          customerBooks: newCustomerBooks,
+          orderSum: orderSumNumber
         }
       })
     }
   }
 
   render() {
-    const { itemsNumber, customerBooks, booksData  } = this.state;
+    const { itemsNumber, customerBooks, booksData, orderSum  } = this.state;
 
     return (
     <div className="container">
       <Header 
         itemsNumber={itemsNumber}
+        orderSum={orderSum}
       />
       <Frontpage 
         onAddToCart={this.onAddToCart}
