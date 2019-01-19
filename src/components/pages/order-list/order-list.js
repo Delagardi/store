@@ -1,5 +1,5 @@
 import React from 'react';
-
+import OrderItem from '../order-item';
 import './order-list.css';
 
 const OrderList = ({ 
@@ -12,30 +12,17 @@ const OrderList = ({
     const { id, name, price, count } = item;
     index += 1;
     return (
-      <tr key={id}>
-        <td>{index}</td>
-        <td>{name}</td>
-        <td>{count}</td>
-        <td>{price}</td>
-        <td>
-          <button
-            onClick={ () => onRemove(id) }
-            className="order-item-button d-block" href="remove">
-            <i className="icon d-inline-block ion-md-remove-circle-outline"></i>
-          </button>
-          <button
-            onClick={ () => onAdd(id) }
-            className="order-item-button d-block" href="remove">
-            <i className="icon d-inline-block ion-md-add-circle-outline">
-            </i>
-          </button>
-          <button
-            onClick={ () => onDelete(id) }
-            className="order-item-button d-block" href="remove">
-            <i className="icon d-inline-block ion-md-close-circle-outline"></i>
-          </button>
-        </td>
-      </tr>
+      <OrderItem 
+        key={id}
+        id={id}
+        index={index}
+        name={name}
+        count={count}
+        price={price}
+        onRemove={onRemove}
+        onAdd={onAdd}
+        onDelete={onDelete}
+      />
     );
   });
 

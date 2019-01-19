@@ -22,14 +22,7 @@ class App extends Component {
           author: "Joseph Campbell",
           price: "$43",
           imageSource: 'hero-faces.jpg'
-        },
-        {
-          id: 323,
-          name: "Some third test book",
-          author: "Joseph Noah",
-          price: "$143",
-          imageSource: 'sapiens.jpg'
-        },
+        }
       ],
       customerBooks: [],
       itemsNumber: 0
