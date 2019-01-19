@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Frontpage from '../pages/frontpage';
-import ItemList from '../pages/item-list';
+import OrderList from '../pages/order-list';
 import Header from '../pages/header';
 
 class App extends Component {
@@ -70,8 +70,10 @@ class App extends Component {
   }
 
   onDelete = (id) => {
-    this.setState(({ customerBooks }) => {
-      const index = customerBooks.findIndex( (item) => item.id === id);
+    this.setState(({ itemsNumber, customerBooks }) => {
+      const index = customerBooks.findIndex( (item) => item.id === id );
+      const stateCopy =  JSON.parse(JSON.stringify(customerBooks));
+      const itemsCount = itemsNumber - stateCopy[index].count;
 
       const newCustomerBooks = [
         ...customerBooks.slice(0, index),
@@ -79,6 +81,7 @@ class App extends Component {
       ]
 
       return {
+        itemsNumber: itemsCount,
         customerBooks: newCustomerBooks
       }
     });
@@ -130,7 +133,7 @@ class App extends Component {
         onAddToCart={this.onAddToCart}
         booksData={booksData}
       />
-      <ItemList
+      <OrderList
         onRemove={this.onRemove}
         onAdd={this.onAdd}
         onDelete={this.onDelete}

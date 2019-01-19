@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './item-list.css';
+import './order-list.css';
 
-const ItemList = ({ 
+const OrderList = ({ 
   customerBooks, 
   onRemove, 
   onAdd, 
@@ -61,4 +61,4 @@ const ItemList = ({
   );
 }
 
-export default ItemList;
+export default OrderList;
