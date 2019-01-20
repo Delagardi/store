@@ -1,16 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './frontpage-item.css';
 
 const FrontpageItem = (props) => {
   const { 
-    id, 
-    name, 
-    author, 
-    price, 
-    imageSource,
+    book,
     onAddToCart 
   } = props;
+  
+  const {
+    id,
+    name,
+    author,
+    price,
+    imageSource
+  } = book;
 
   return (
     <div 
@@ -19,7 +24,9 @@ const FrontpageItem = (props) => {
         <img height="200" src={`/book-preview/${imageSource}`} alt={name} />
       </div>
       <div className="item-data">
-        <h3>{name}</h3>
+        <Link to="/books:id">
+          <h3>{name}</h3>
+        </Link>
         <span>{author}</span>
         <span className="item-price d-block">{price}</span>
         <button 

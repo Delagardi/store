@@ -4,16 +4,12 @@ import './frontpage.css';
 
 const Frontpage = ({ onAddToCart, booksData }) => {
   const items = booksData.map( (item) => {
-    const { id, name, author, price, imageSource } = item;
+    const { id } = item;
     
     return (
       <FrontpageItem
-        key={id} 
-        id={id}
-        name={name}
-        author={author}
-        price={price}
-        imageSource={imageSource}
+        key={id}
+        book={item}
         onAddToCart={onAddToCart}
       />
     );

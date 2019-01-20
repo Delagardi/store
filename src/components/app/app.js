@@ -3,6 +3,7 @@ import Frontpage from '../pages/frontpage';
 import OrderList from '../pages/order-list';
 import Header from '../pages/header';
 import ServiceBookstore from '../../services/service-bookstore';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -127,23 +128,30 @@ class App extends Component {
     const { itemsNumber, customerBooks, booksData, orderSum  } = this.state;
 
     return (
-    <div className="container">
-      <Header 
-        itemsNumber={itemsNumber}
-        orderSum={orderSum}
-      />
-      <Frontpage 
-        onAddToCart={this.onAddToCart}
-        booksData={booksData}
-      />
-      <OrderList
-        onRemove={this.onRemove}
-        onAdd={this.onAdd}
-        onDelete={this.onDelete}
-        customerBooks={customerBooks}
-        booksData={booksData}
-      />
-    </div>
+    <Router>
+      <div className="container">
+        <Route 
+          path="/books" 
+          component={Frontpage}
+          exact
+        />
+        <Header 
+          itemsNumber={itemsNumber}
+          orderSum={orderSum}
+        />
+        <Frontpage 
+          onAddToCart={this.onAddToCart}
+          booksData={booksData}
+        />
+        <OrderList
+          onRemove={this.onRemove}
+          onAdd={this.onAdd}
+          onDelete={this.onDelete}
+          customerBooks={customerBooks}
+          booksData={booksData}
+        />
+      </div>
+    </Router>
     )
   }
 }
