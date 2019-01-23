@@ -6,6 +6,12 @@ import ServiceBookstore from '../../services/service-bookstore';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ErrorBoundry from '../error-boundry';
 
+// import withBookstoreService from '../hoc';
+
+// // const App = (withBookstoreService) = {
+
+// // }
+
 class App extends Component {
   constructor() {
     super();
