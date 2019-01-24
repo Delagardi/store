@@ -7,7 +7,6 @@ const Header = ({ itemsNumber, orderSum }) => {
     <div className="header">
       <Link 
         to="/"
-        exact
       >
         <h1 className="header-top">Book Store</h1>
       </Link>

@@ -138,11 +138,6 @@ class App extends Component {
     <ErrorBoundry>
       <Router>
         <div className="container">
-          <Route 
-            path="/books" 
-            component={Frontpage}
-            exact
-          />
           <Header 
             itemsNumber={itemsNumber}
             orderSum={orderSum}
