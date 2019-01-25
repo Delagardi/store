@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './header.css';
 
 const Header = ({ itemsNumber, orderSum }) => {
@@ -20,4 +21,11 @@ const Header = ({ itemsNumber, orderSum }) => {
   );
 }
 
-export default Header;
+const MapStateToProps = (state) => {
+  return {
+    itemsNumber: state.itemsNumber,
+    orderSum: state.orderSum
+  };
+}
+
+export default connect(MapStateToProps)(Header);

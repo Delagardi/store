@@ -1,5 +1,8 @@
 const initialState = {
-  books: []
+  books: [],
+  customerBooks: [],
+  itemsNumber: 0,
+  orderSum: 0
 };
 
 const reducer = (state = initialState, action) => {
