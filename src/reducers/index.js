@@ -12,6 +12,9 @@ const reducer = (state = initialState, action) => {
         books: action.payload
       };
     
+    case 'ITEM_ADDED_TO_CART':
+      return state.itemsNumber + 1;
+    
     default: 
       return state;
   }

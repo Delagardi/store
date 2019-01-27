@@ -5,6 +5,15 @@ const booksLoaded = (newBooks) => {
   });
 }
 
+const onAddToCart = () => {
+  console.log('!!!');
+
+  return ({
+    type: 'ITEM_ADDED_TO_CART'
+  })
+} 
+
 export {
-  booksLoaded
+  booksLoaded,
+  onAddToCart
 }
