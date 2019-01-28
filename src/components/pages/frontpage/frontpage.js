@@ -34,23 +34,23 @@ class Frontpage extends Component {
   
   render() {
     const { onAddToCart } = this.props;
-    const { booksData } = this.state;
+    //const { booksData } = this.state;
 
-    console.log('booksData:');
-    console.log(booksData);
+    // console.log('booksData:');
+    // console.log(booksData);
     
-    return (
-      booksData.map( (item) => {
-        return(
-          <div className="container">
-            <FrontpageItem
-              key={item.id}
-              book={item}
-              onAddToCart={onAddToCart}
-            />
-          </div>
-        )
-      })
+    return (<h2>Delete Me</h2>
+    //   // booksData.map( (item) => {
+    //   //   return(
+    //   //     <div className="container">
+    //   //       <FrontpageItem
+    //   //         key={item.id}
+    //   //         book={item}
+    //   //         onAddToCart={onAddToCart}
+    //   //       />
+    //   //     </div>
+    //   //   )
+    //   // })
     )
   }
 }
