@@ -122,13 +122,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.serviceBookstore
-      .getBooks()
-      .then( (booksData) => {
-        this.setState({
-          booksData: booksData
-        });
-      });
+    // this.serviceBookstore
+    //   .getBooks()
+    //   .then( (booksData) => {
+    //     this.setState({
+    //       booksData: booksData
+    //     });
+    //   });
+    
+    const booksLoaded = this.serviceBookstore.getBooks()
+    
+    this.setState({
+      booksData: booksLoaded
+    });
   }
   
   render() {

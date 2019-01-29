@@ -1,5 +1,5 @@
 export default class ServiceBookstore {
-  getBooks = async () => {
+  getBooks() {
     return [
       {
         id: 321,

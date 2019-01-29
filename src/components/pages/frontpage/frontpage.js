@@ -30,6 +30,7 @@ class Frontpage extends Component {
 
     console.log('data:');
     console.log(data);
+    this.props.booksLoaded(data);
   }
   
   render() {
@@ -69,7 +70,12 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     onAddToCart,
-    booksData: booksLoaded
+    booksLoaded: (newBooks) => {
+      dispatch({
+        type: 'BOOKS_LOADED',
+        payload: newBooks
+      })
+    }
   }
 }
 
