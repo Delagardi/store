@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import FrontpageItem from '../frontpage-item';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { booksLoaded } from '../../../actions';
 import withBookstoreService from '../../hoc';
+import Spinner from '../../spinner';
 
 import './frontpage.css';
 
@@ -20,8 +20,11 @@ class Frontpage extends Component {
   
   render() {
     //const { onAddToCart } = this.props;
-    const { books } = this.props;
+    const { books, loading } = this.props;
     
+    if (loading) {
+      return <Spinner />
+    }
     return (
       books.map( (item) => {
         return(
@@ -38,9 +41,10 @@ class Frontpage extends Component {
 }
 //onAddToCart={onAddToCart}              
 
-const mapStateToProps = ({ books }) => {
+const mapStateToProps = ({ books, loading }) => {
   return {
-    books: books
+    books,
+    loading
   }
 }
 

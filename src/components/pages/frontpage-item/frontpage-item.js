@@ -19,7 +19,7 @@ class FrontpageItem extends Component {
     console.log(book);
 
     const {
-      id,
+      //id,
       name,
       author,
       price,
