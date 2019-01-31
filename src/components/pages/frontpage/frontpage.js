@@ -4,15 +4,9 @@ import FrontpageItem from '../frontpage-item';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { booksLoaded } from '../../../actions';
-
-import ServiceBookstore from '../../../services/service-bookstore';
-
 import withBookstoreService from '../../hoc';
 
-
 import './frontpage.css';
-
-//const serviceBookstore = new ServiceBookstore();
 
 class Frontpage extends Component {
   componentDidMount() {
