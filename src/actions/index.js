@@ -5,11 +5,13 @@ const booksLoaded = (newBooks) => {
   });
 }
 
-const onAddToCart = () => {
-  console.log('!!!');
+const onAddToCart = (index) => {
+  console.log('onAddToCart index:');
+  console.log(index);
 
   return ({
-    type: 'ITEM_ADDED_TO_CART'
+    type: 'ITEM_ADDED_TO_CART',
+    index: index
   })
 } 
 

@@ -130,11 +130,11 @@ class App extends Component {
     //     });
     //   });
     
-    const booksLoaded = this.serviceBookstore.getBooks()
+    //const booksLoaded = this.serviceBookstore.getBooks()
     
-    this.setState({
-      booksData: booksLoaded
-    });
+    // this.setState({
+    //   booksData: booksLoaded
+    // });
   }
   
   render() {
@@ -150,7 +150,7 @@ class App extends Component {
           />
           <Frontpage 
             onAddToCart={this.onAddToCart}
-            booksData={booksData}
+            //booksData={booksData}
           />
           <OrderList
             onRemove={this.onRemove}

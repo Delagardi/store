@@ -13,7 +13,12 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'ITEM_ADDED_TO_CART':
-      return state.itemsNumber + 1;
+      const buffer = state.itemsNumber + 1;
+      return {
+        book: state.books[action.index],
+        itemsNumber: buffer,
+        addedBookIndex: action.index
+      }
     
     default: 
       return state;

@@ -12,7 +12,7 @@ export default class ServiceBookstore {
         id: 322,
         name: "The Hero with a Thousand Faces",
         author: "Joseph Campbell",
-        price: 10,
+        price: 11,
         imageSource: 'hero-faces.jpg'
       }
     ];

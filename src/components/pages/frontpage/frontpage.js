@@ -3,7 +3,7 @@ import FrontpageItem from '../frontpage-item';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../../../actions';
+import { booksLoaded } from '../../../actions';
 
 import ServiceBookstore from '../../../services/service-bookstore';
 
@@ -12,11 +12,11 @@ import withBookstoreService from '../../hoc';
 
 import './frontpage.css';
 
-const serviceBookstore = new ServiceBookstore();
+//const serviceBookstore = new ServiceBookstore();
 
 class Frontpage extends Component {
   componentDidMount() {
-    const { bookstoreService, onAddToCart} = this.props;
+    const { bookstoreService } = this.props;
 
     const data = bookstoreService.getBooks();
 
@@ -28,54 +28,49 @@ class Frontpage extends Component {
     //     });
     // });
 
-    console.log('data:');
-    console.log(data);
     this.props.booksLoaded(data);
   }
   
   render() {
-    const { onAddToCart } = this.props;
-    //const { booksData } = this.state;
-
-    // console.log('booksData:');
-    // console.log(booksData);
+    //const { onAddToCart } = this.props;
+    const { books } = this.props;
     
-    return (<h2>Delete Me</h2>
-    //   // booksData.map( (item) => {
-    //   //   return(
-    //   //     <div className="container">
-    //   //       <FrontpageItem
-    //   //         key={item.id}
-    //   //         book={item}
-    //   //         onAddToCart={onAddToCart}
-    //   //       />
-    //   //     </div>
-    //   //   )
-    //   // })
+    return (
+      books.map( (item) => {
+        return(
+          <div className="container">
+            <FrontpageItem
+              key={item.id}
+              book={item}
+            />
+          </div>
+        )
+      })
     )
   }
 }
+//onAddToCart={onAddToCart}              
 
-const mapStateToProps = (state) => {
-  console.log('state:');
-  console.log(state);
+const mapStateToProps = ({ books }) => {
   return {
-    
+    books: books
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
-  const { onAddToCart, booksLoaded } = bindActionCreators(actions, dispatch);
+  //const { onAddToCart, booksLoaded } = bindActionCreators(actions, dispatch);
 
   return {
-    onAddToCart,
-    booksLoaded: (newBooks) => {
-      dispatch({
-        type: 'BOOKS_LOADED',
-        payload: newBooks
-      })
-    }
+    // Varian 1
+    booksLoaded: (newBooks) => dispatch(booksLoaded(newBooks)),
+    //Variant 2
+    // booksLoaded: (newBooks) => {
+    //   dispatch({
+    //     type: 'BOOKS_LOADED',
+    //     payload: newBooks
+    //   })
+    // }
   }
 }
 
