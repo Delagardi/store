@@ -16,19 +16,12 @@ import './frontpage.css';
 
 class Frontpage extends Component {
   componentDidMount() {
-    const { bookstoreService } = this.props;
+    const { bookstoreService, booksLoaded } = this.props;
 
-    const data = bookstoreService.getBooks();
-
-    // this.serviceBookstore
-    //   .getBooks()
-    //   .then( (booksData) => {
-    //     this.setState({
-    //       booksData: booksData
-    //     });
-    // });
-
-    this.props.booksLoaded(data);
+    bookstoreService.getBooks()
+      .then( (data) => {
+        booksLoaded(data); 
+      })
   }
   
   render() {
