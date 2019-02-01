@@ -11,29 +11,19 @@ import './frontpage.css';
 
 class Frontpage extends Component {
   componentDidMount() {
-    const { 
-      bookstoreService, 
-      booksLoaded, 
-      booksRequested,
-      booksError
-    } = this.props;
-
-    booksRequested();
-    bookstoreService.getBooks()
-      .then( (data) => booksLoaded(data) )
-      .catch( (error) => booksError(error))
+    this.props.fetchBooks();
   }
   
   render() {
     //const { onAddToCart } = this.props;
     const { books, loading, error } = this.props;
     
-    if (error) {
-      return <ErrorIndicator />
-    }
-
     if (loading) {
       return <Spinner />
+    }
+
+    if (error) {
+      return <ErrorIndicator />
     }
 
     return (
@@ -61,14 +51,23 @@ const mapStateToProps = ({ books, loading, error }) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   //const { onAddToCart, booksLoaded } = bindActionCreators(actions, dispatch);
-
+  const { bookstoreService } = ownProps;
+  
   return {
-    booksRequested: () => dispatch(booksRequested()),
-    booksError: (error) => dispatch(booksError(error)),
+    fetchBooks: () => {
+      dispatch(booksRequested());
+      
+      bookstoreService
+        .getBooks()
+        .then( (data) => dispatch(booksLoaded(data)) )
+        .catch( (error) => dispatch(booksError(error)) ) 
+    }
+    //booksRequested: () => dispatch(booksRequested()),
+    //booksError: (error) => dispatch(booksError(error)),
     // Varian 1
-    booksLoaded: (newBooks) => dispatch(booksLoaded(newBooks)),
+    //booksLoaded: (newBooks) => dispatch(booksLoaded(newBooks)),
     //Variant 2
     // booksLoaded: (newBooks) => {
     //   dispatch({
