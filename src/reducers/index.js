@@ -3,13 +3,15 @@ const initialState = {
   customerBooks: [],
   itemsNumber: 0,
   orderSum: 0,
-  loading: true
+  loading: true,
+  addedBookIndex: null
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'BOOKS_LOADED':
       return {
+        ...state,
         books: action.payload,
         loading: false
       };
@@ -17,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case 'ITEM_ADDED_TO_CART':
       const buffer = state.itemsNumber + 1;
       return {
-        book: state.books[action.index],
+        ...state,
         itemsNumber: buffer,
         addedBookIndex: action.index
       }
