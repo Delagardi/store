@@ -10,14 +10,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'BOOKS_REQUESTED':
+    case 'FETCH_BOOKS_REQUEST':
       return {
         ...state,
         loading: true,
         error: null
       }
 
-    case 'BOOKS_LOADED':
+    case 'FETCH_BOOKS_SUCCESS':
       return {
         ...state,
         books: action.payload,
@@ -25,14 +25,14 @@ const reducer = (state = initialState, action) => {
         error: null
       };
     
-    case 'ITEM_ADDED_TO_CART':
+    case 'ADD_BOOK_TO_CART':
       return {
         ...state,
         itemsNumber: state.itemsNumber + 1,
         addedBookIndex: action.index,
       }
     
-    case 'BOOKS_ERROR':
+    case 'FETCH_BOOK_FAILURE':
       return {
         ...state,
         loading: false,

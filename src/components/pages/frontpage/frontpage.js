@@ -64,17 +64,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         .then( (data) => dispatch(booksLoaded(data)) )
         .catch( (error) => dispatch(booksError(error)) ) 
     }
-    //booksRequested: () => dispatch(booksRequested()),
-    //booksError: (error) => dispatch(booksError(error)),
-    // Varian 1
-    //booksLoaded: (newBooks) => dispatch(booksLoaded(newBooks)),
-    //Variant 2
-    // booksLoaded: (newBooks) => {
-    //   dispatch({
-    //     type: 'BOOKS_LOADED',
-    //     payload: newBooks
-    //   })
-    // }
   }
 }
 

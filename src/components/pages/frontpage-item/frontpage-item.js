@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAddToCart: (index) => {
       dispatch({
-        type: 'ITEM_ADDED_TO_CART',
+        type: 'ADD_BOOK_TO_CART',
         index: index
       })
     }
