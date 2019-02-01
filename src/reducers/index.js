@@ -4,26 +4,41 @@ const initialState = {
   itemsNumber: 0,
   orderSum: 0,
   loading: true,
-  addedBookIndex: null
+  addedBookIndex: null,
+  error: null
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'BOOKS_REQUESTED':
+      return {
+        ...state,
+        loading: true,
+        error: null
+      }
+
     case 'BOOKS_LOADED':
       return {
         ...state,
         books: action.payload,
-        loading: false
+        loading: false,
+        error: null
       };
     
     case 'ITEM_ADDED_TO_CART':
-      const buffer = state.itemsNumber + 1;
       return {
         ...state,
-        itemsNumber: buffer,
-        addedBookIndex: action.index
+        itemsNumber: state.itemsNumber + 1,
+        addedBookIndex: action.index,
       }
     
+    case 'BOOKS_ERROR':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
+
     default: 
       return state;
   }

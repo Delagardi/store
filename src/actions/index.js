@@ -1,3 +1,9 @@
+const booksRequested = () => {
+  return ({
+    type: 'BOOKS_REQUESTED',
+  })
+}
+
 const booksLoaded = (newBooks) => {
   return ({
     type: 'BOOKS_LOADED',
@@ -13,9 +19,20 @@ const onAddToCart = (index) => {
     type: 'ITEM_ADDED_TO_CART',
     index: index
   })
-} 
+}
+
+const booksError = (errorMessage) => {
+  console.log('errorMessage:');
+  console.log(errorMessage);
+  return ({
+    type: 'BOOKS_ERROR',
+    payload: errorMessage
+  })
+}
 
 export {
   booksLoaded,
-  onAddToCart
+  onAddToCart,
+  booksRequested,
+  booksError
 }
