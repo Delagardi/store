@@ -9,7 +9,22 @@ import ErrorIndicator from '../../error-indicator';
 
 import './frontpage.css';
 
-class Frontpage extends Component {
+const Frontpage = ({ books }) => {
+  return (
+    books.map( (item) => {
+      return(
+        <div className="container">
+          <FrontpageItem
+            key={item.id}
+            book={item}
+          />
+        </div>
+      )
+    })
+  )
+}
+
+class FrontpageContainer extends Component {
   componentDidMount() {
     this.props.fetchBooks();
   }
@@ -26,18 +41,7 @@ class Frontpage extends Component {
       return <ErrorIndicator />
     }
 
-    return (
-      books.map( (item) => {
-        return(
-          <div className="container">
-            <FrontpageItem
-              key={item.id}
-              book={item}
-            />
-          </div>
-        )
-      })
-    )
+    return <Frontpage books={books} />
   }
 }
 //onAddToCart={onAddToCart}              
@@ -67,4 +71,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(Frontpage));
+export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(FrontpageContainer));
