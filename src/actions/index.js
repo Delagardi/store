@@ -22,8 +22,6 @@ const onAddToCart = (index) => {
 }
 
 const booksError = (errorMessage) => {
-  console.log('errorMessage:');
-  console.log(errorMessage);
   return ({
     type: 'BOOKS_ERROR',
     payload: errorMessage

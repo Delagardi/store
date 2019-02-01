@@ -21,7 +21,7 @@ class Frontpage extends Component {
     booksRequested();
     bookstoreService.getBooks()
       .then( (data) => booksLoaded(data) )
-      .catch( (error) => booksError(error) )
+      .catch( (error) => booksError(error))
   }
   
   render() {
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     booksRequested: () => dispatch(booksRequested()),
-    booksError: () => dispatch(booksError()),
+    booksError: (error) => dispatch(booksError(error)),
     // Varian 1
     booksLoaded: (newBooks) => dispatch(booksLoaded(newBooks)),
     //Variant 2
