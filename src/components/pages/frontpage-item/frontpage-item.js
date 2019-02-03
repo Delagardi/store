@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { onAddToCart } from '../../../actions';
 
 import './frontpage-item.css';
 
@@ -19,7 +20,7 @@ class FrontpageItem extends Component {
     console.log(book);
 
     const {
-      //id,
+      id,
       name,
       author,
       price,
@@ -46,7 +47,7 @@ class FrontpageItem extends Component {
           <span className="item-price d-block">{price}</span>
           <button 
             className="btn btn-success"
-            onClick={onAddToCart}>Add to cart</button>
+            onClick={() => onAddToCart(id, price)}>Add to cart</button>
         </div>
       </div>
     );
@@ -55,16 +56,14 @@ class FrontpageItem extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    books: state.books
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddToCart: (index) => {
-      dispatch({
-        type: 'ADD_BOOK_TO_CART',
-        index: index
-      })
+    onAddToCart: (index, price) => {
+      return dispatch(onAddToCart(index, price))
     }
   }
 }

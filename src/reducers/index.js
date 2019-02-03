@@ -29,6 +29,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         itemsNumber: state.itemsNumber + 1,
+        orderSum: state.orderSum + action.price,
         addedBookIndex: action.index,
       }
     

@@ -18,14 +18,7 @@ export default class ServiceBookstore {
 
   getBooks() {
     return new Promise( (resolve, reject) => {
-      
-      setTimeout( () => {
-        if (Math.random() > 0.75) {
-          reject(new Error('We have some problem here') )
-        } else {
-          resolve(this.data);
-        }
-      }, 700)
+      resolve(this.data);
     })
   }
 }
