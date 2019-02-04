@@ -25,8 +25,17 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'ADD_BOOK_TO_CART':
+      const newCartItem = {
+        id: action.payload,
+        count: 1
+      }
+
+      let newCart = [
+        ...state.cart,
+        newCartItem
+      ]
+
       const dublicateIndex = state.cart.findIndex( (item) => item.id === action.payload );
-      let newCart = null;
 
       if (dublicateIndex >= 0 ) {
         newCart = state.cart.map( 
@@ -37,16 +46,6 @@ const reducer = (state = initialState, action) => {
                             } 
                           : cartItem 
                         )
-      } else {
-        const newCartItem = {
-          id: action.payload,
-          count: 1
-        }
-
-        newCart = [
-          ...state.cart,
-          newCartItem
-        ]
       }
 
       const cartBook = state.books.find( (book) => book.id === action.payload );
