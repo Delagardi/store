@@ -62,8 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddToCart: (index, price) => {
-      return dispatch(onAddToCart(index, price))
+    onAddToCart: (id, price) => {
+      return dispatch(onAddToCart(id, price))
     }
   }
 }

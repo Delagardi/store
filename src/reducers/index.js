@@ -1,11 +1,10 @@
 const initialState = {
   books: [],
-  customerBooks: [],
-  itemsNumber: 0,
-  orderSum: 0,
+  cart: [],
+  cartQuantity: 0,
+  cartSum: 0,
   loading: true,
-  addedBookIndex: null,
-  error: null
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,12 +25,39 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'ADD_BOOK_TO_CART':
+      const dublicateIndex = state.cart.findIndex( (item) => item.id === action.payload );
+      let newCart = null;
+
+      if (dublicateIndex >= 0 ) {
+        newCart = state.cart.map( 
+                          (cartItem) => cartItem.id === action.payload 
+                          ? { 
+                              ...cartItem, 
+                              count: cartItem.count + 1 
+                            } 
+                          : cartItem 
+                        )
+      } else {
+        const newCartItem = {
+          id: action.payload,
+          count: 1
+        }
+
+        newCart = [
+          ...state.cart,
+          newCartItem
+        ]
+      }
+
+      const cartBook = state.books.find( (book) => book.id === action.payload );
+      
       return {
         ...state,
-        itemsNumber: state.itemsNumber + 1,
-        orderSum: state.orderSum + action.price,
-        addedBookIndex: action.index,
+        cartQuantity: state.cartQuantity + 1,
+        cartSum: state.cartSum + cartBook.price,
+        cart: newCart
       }
+      
     
     case 'FETCH_BOOK_FAILURE':
       return {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './header.css';
 
-const Header = ({ itemsNumber, orderSum }) => {
+const Header = ({ cartQuantity = 0, cartSum = 0 }) => {
   return (
     <div className="header">
       <Link 
@@ -14,7 +14,7 @@ const Header = ({ itemsNumber, orderSum }) => {
       <div className="header-cart">
       <i className="icon d-inline-block ion-md-cart"></i>
         <div className="header-cart-text d-inline-block">
-          {itemsNumber} items (${orderSum})
+          {cartQuantity} items (${cartSum})
         </div>
       </div>
     </div>
@@ -23,8 +23,8 @@ const Header = ({ itemsNumber, orderSum }) => {
 
 const MapStateToProps = (state) => {
   return {
-    itemsNumber: state.itemsNumber,
-    orderSum: state.orderSum
+    cartQuantity: state.cartQuantity,
+    cartSum: state.cartSum
   };
 }
 

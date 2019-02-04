@@ -11,17 +11,11 @@ const booksLoaded = (newBooks) => {
   });
 }
 
-const onAddToCart = (index, price) => {
-  console.log('onAddToCart index:');
-  console.log(index);
-
-  console.log('onAddToCart price:');
-  console.log(price);
-
+const onAddToCart = (id, price) => {
   return ({
     type: 'ADD_BOOK_TO_CART',
-    index,
-    price
+    payload: id,
+    meta: price
   })
 }
 
