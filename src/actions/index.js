@@ -14,8 +14,7 @@ const booksLoaded = (newBooks) => {
 const onAddToCart = (id, price) => {
   return ({
     type: 'ADD_BOOK_TO_CART',
-    payload: id,
-    meta: price
+    payload: id
   })
 }
 
