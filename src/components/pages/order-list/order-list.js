@@ -12,7 +12,12 @@ const OrderList = ({
 }) => {
   const items = cart.map( (item, index) => {
     const { id, count } = item;
-    const book = books.find( (book) => book.id === id );
+    console.log('item:');
+    console.log(item);
+    let book = books.find( (book) => book.id === id );
+    if (book === undefined) {
+      return null;
+    }
     const { name, price } = book;
     const priceSum = price * count;
     index += 1;

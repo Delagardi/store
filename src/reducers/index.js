@@ -60,14 +60,38 @@ const reducer = (state = initialState, action) => {
     case 'REMOVE_BOOK_REQUEST':
       const removingBook = state.books.find( (book) => book.id === action.payload );
 
-      const updatedCart = state.cart.map( 
-                              (cartItem) => cartItem.id === action.payload 
-                              ? { 
-                                  ...cartItem, 
-                                  count: cartItem.count - 1 
-                                } 
-                              : cartItem 
-      )
+      const updatedCart = state.cart.map( (cartItem) => {
+        if (cartItem.id === action.payload) {
+          if (cartItem.count > 1) {
+            return ({
+              ...cartItem, 
+              count: cartItem.count - 1 
+            })
+          } else {
+
+            const cartItemIndex = state.cart.findIndex( (item) => item.id === action.payload );
+            console.log('cartItemIndex:');
+            console.log(cartItemIndex);
+
+            const newCartArray = [
+              ...state.cart.slice(0, cartItemIndex),
+              ...state.cart.slice(cartItemIndex+1)
+            ]
+            console.log('newCartArray:');
+            console.log(newCartArray);
+
+            return {
+              ...state,
+              cartQuantity: state.cartQuantity - 1,
+              cartSum: state.cartSum - removingBook.price,
+              cart: newCartArray
+            }
+
+          }
+        } else {
+          return cartItem 
+        }
+      });
 
       return {
         ...state,
