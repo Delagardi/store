@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { onRemove } from '../../../actions';
+import { onRemove, onAddToCart } from '../../../actions';
 import './order-list.css';
 
 const OrderList = ({ 
@@ -76,7 +76,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    onRemove: (id) => dispatch(onRemove(id))
+    onRemove: (id) => dispatch(onRemove(id)),
+    onAdd: (id) => dispatch(onAddToCart(id))
   })
 }
 
