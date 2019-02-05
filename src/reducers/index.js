@@ -57,10 +57,10 @@ const reducer = (state = initialState, action) => {
         cart: newCart
       }
     
-    case 'REMOVE_BOOK_REQUEST':
-      const removingBook = state.books.find( (book) => book.id === action.payload );
+    case 'REMOVE_BOOK_REQUEST': {
+      const cartBook = state.books.find( (book) => book.id === action.payload );
 
-      const updatedCart = state.cart.map( (cartItem) => {
+      const newCart = state.cart.map( (cartItem) => {
         if (cartItem.id === action.payload) {
           if (cartItem.count > 1) {
             return ({
@@ -71,7 +71,7 @@ const reducer = (state = initialState, action) => {
 
             const cartItemIndex = state.cart.findIndex( (item) => item.id === action.payload );
 
-            const newCartArray = [
+            const newCart = [
               ...state.cart.slice(0, cartItemIndex),
               ...state.cart.slice(cartItemIndex+1)
             ]
@@ -79,8 +79,8 @@ const reducer = (state = initialState, action) => {
             return {
               ...state,
               cartQuantity: state.cartQuantity - 1,
-              cartSum: state.cartSum - removingBook.price,
-              cart: newCartArray
+              cartSum: state.cartSum - cartBook.price,
+              cart: newCart
             }
 
           }
@@ -92,27 +92,28 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cartQuantity: state.cartQuantity - 1,
-        cartSum: state.cartSum - removingBook.price,
-        cart: updatedCart
+        cartSum: state.cartSum - cartBook.price,
+        cart: newCart
       }
+    }
     
-    case 'DELETE_BOOK_REQUEST':
-      const indexCart = state.cart.findIndex( (item) => item.id === action.payload );
+    case 'DELETE_BOOK_REQUEST': {
+      const index = state.cart.findIndex( (item) => item.id === action.payload );
       const indexBooks = state.books.findIndex( (book) => book.id === action.payload );
-      const newCartSum = state.cartSum - state.books[indexBooks].price * state.cart[indexCart].count;
+      const newCartSum = state.cartSum - state.books[indexBooks].price * state.cart[index].count;
       
-      const newCartArray = [
-        ...state.cart.slice(0, indexCart),
-        ...state.cart.slice(indexCart+1)
+      const newCart = [
+        ...state.cart.slice(0, index),
+        ...state.cart.slice(index+1)
       ]
 
       return {
         ...state,
         cartSum: newCartSum,
-        cartQuantity: state.cartQuantity - state.cart[indexCart].count,
-        cart: newCartArray
+        cartQuantity: state.cartQuantity - state.cart[index].count,
+        cart: newCart
       }
-
+    }
 
     
     case 'FETCH_BOOK_FAILURE':
