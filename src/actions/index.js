@@ -25,9 +25,17 @@ const booksError = (errorMessage) => {
   })
 }
 
+const onRemove = (id) => {
+  return ({
+    type: 'REMOVE_BOOK_REQUEST',
+    payload: id
+  })
+}
+
 export {
   booksLoaded,
   onAddToCart,
   booksRequested,
-  booksError
+  booksError,
+  onRemove
 }

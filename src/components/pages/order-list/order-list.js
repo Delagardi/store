@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { onRemove } from '../../../actions';
 import './order-list.css';
 
 const OrderList = ({ 
@@ -74,7 +75,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-
+  return ({
+    onRemove: (id) => dispatch(onRemove(id))
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
