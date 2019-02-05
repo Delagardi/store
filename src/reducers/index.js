@@ -70,15 +70,11 @@ const reducer = (state = initialState, action) => {
           } else {
 
             const cartItemIndex = state.cart.findIndex( (item) => item.id === action.payload );
-            console.log('cartItemIndex:');
-            console.log(cartItemIndex);
 
             const newCartArray = [
               ...state.cart.slice(0, cartItemIndex),
               ...state.cart.slice(cartItemIndex+1)
             ]
-            console.log('newCartArray:');
-            console.log(newCartArray);
 
             return {
               ...state,

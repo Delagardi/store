@@ -12,8 +12,7 @@ const OrderList = ({
 }) => {
   const items = cart.map( (item, index) => {
     const { id, count } = item;
-    console.log('item:');
-    console.log(item);
+    
     let book = books.find( (book) => book.id === id );
     if (book === undefined) {
       return null;

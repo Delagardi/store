@@ -13,9 +13,8 @@ const Frontpage = ({ books }) => {
   return (
     books.map( (item) => {
       return(
-        <div className="container">
+        <div className="container" key={item.id}>
           <FrontpageItem
-            key={item.id}
             book={item}
           />
         </div>

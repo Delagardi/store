@@ -6,18 +6,11 @@ import { onAddToCart } from '../../../actions';
 import './frontpage-item.css';
 
 class FrontpageItem extends Component {
-  componentDidMount() {
-    
-  }
-
   render() {
     const { 
       book,
       onAddToCart 
     } = this.props;
-    
-    console.log('book:');
-    console.log(book);
 
     const {
       id,
@@ -26,12 +19,6 @@ class FrontpageItem extends Component {
       price,
       imageSource
     } = book;
-    
-    console.log('state:');
-    console.log(this.state);
-
-    console.log('props:');
-    console.log(this.props);
 
     return (
       <div 
