@@ -25,9 +25,16 @@ const booksError = (errorMessage) => {
   })
 }
 
-const onRemove = (id) => {
+const onRemoveFromCart = (id) => {
   return ({
     type: 'REMOVE_BOOK_REQUEST',
+    payload: id
+  })
+}
+
+const onDeleteFromCart = (id) => {
+  return ({
+    type: 'DELETE_BOOK_REQUEST',
     payload: id
   })
 }
@@ -37,5 +44,6 @@ export {
   onAddToCart,
   booksRequested,
   booksError,
-  onRemove
+  onRemoveFromCart,
+  onDeleteFromCart
 }

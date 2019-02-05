@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { onRemove, onAddToCart } from '../../../actions';
+import { onRemoveFromCart, onAddToCart, onDeleteFromCart } from '../../../actions';
 import './order-list.css';
 
 const OrderList = ({ 
   books,
   cart,
-  onRemove, 
-  onAdd, 
-  onDelete 
+  onRemoveFromCart, 
+  onAddToCart, 
+  onDeleteFromCart 
 }) => {
   const items = cart.map( (item, index) => {
     const { id, count } = item;
@@ -25,18 +25,18 @@ const OrderList = ({
         <td>${priceSum}</td>
         <td>
           <button
-            onClick={ () => onRemove(id) }
+            onClick={ () => onRemoveFromCart(id) }
             className="order-item-button d-block" href="remove">
             <i className="icon d-inline-block ion-md-remove-circle-outline"></i>
           </button>
           <button
-            onClick={ () => onAdd(id) }
+            onClick={ () => onAddToCart(id) }
             className="order-item-button d-block" href="remove">
             <i className="icon d-inline-block ion-md-add-circle-outline">
             </i>
           </button>
           <button
-            onClick={ () => onDelete(id) }
+            onClick={ () => onDeleteFromCart(id) }
             className="order-item-button d-block" href="remove">
             <i className="icon d-inline-block ion-md-close-circle-outline"></i>
           </button>
@@ -76,8 +76,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    onRemove: (id) => dispatch(onRemove(id)),
-    onAdd: (id) => dispatch(onAddToCart(id))
+    onRemoveFromCart: (id) => dispatch(onRemoveFromCart(id)),
+    onAddToCart: (id) => dispatch(onAddToCart(id)),
+    onDeleteFromCart: (id) => dispatch(onDeleteFromCart(id))
   })
 }
 

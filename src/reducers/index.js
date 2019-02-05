@@ -76,6 +76,25 @@ const reducer = (state = initialState, action) => {
         cart: updatedCart
       }
     
+    case 'DELETE_BOOK_REQUEST':
+      const indexCart = state.cart.findIndex( (item) => item.id === action.payload );
+      const indexBooks = state.books.findIndex( (book) => book.id === action.payload );
+      const newCartSum = state.cartSum - state.books[indexBooks].price * state.cart[indexCart].count;
+      
+      const newCartArray = [
+        ...state.cart.slice(0, indexCart),
+        ...state.cart.slice(indexCart+1)
+      ]
+
+      return {
+        ...state,
+        cartSum: newCartSum,
+        cartQuantity: state.cartQuantity - state.cart[indexCart].count,
+        cart: newCartArray
+      }
+
+
+    
     case 'FETCH_BOOK_FAILURE':
       return {
         ...state,
