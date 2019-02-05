@@ -1,28 +1,46 @@
 import React from 'react';
-import OrderItem from '../order-item';
+import { connect } from 'react-redux';
 import './order-list.css';
 
 const OrderList = ({ 
-  customerBooks, 
+  books,
+  cart,
   onRemove, 
   onAdd, 
   onDelete 
 }) => {
-  const items = customerBooks.map( (item, index) => {
-    const { id, name, price, count } = item;
+  const items = cart.map( (item, index) => {
+    const { id, count } = item;
+    const book = books.find( (book) => book.id === id );
+    const { name, price } = book;
+    const priceSum = price * count;
     index += 1;
+
     return (
-      <OrderItem 
-        key={id}
-        id={id}
-        index={index}
-        name={name}
-        count={count}
-        price={price}
-        onRemove={onRemove}
-        onAdd={onAdd}
-        onDelete={onDelete}
-      />
+      <tr key={id}>
+        <td>{index}</td>
+        <td>{name}</td>
+        <td>{count}</td>
+        <td>${priceSum}</td>
+        <td>
+          <button
+            onClick={ () => onRemove(id) }
+            className="order-item-button d-block" href="remove">
+            <i className="icon d-inline-block ion-md-remove-circle-outline"></i>
+          </button>
+          <button
+            onClick={ () => onAdd(id) }
+            className="order-item-button d-block" href="remove">
+            <i className="icon d-inline-block ion-md-add-circle-outline">
+            </i>
+          </button>
+          <button
+            onClick={ () => onDelete(id) }
+            className="order-item-button d-block" href="remove">
+            <i className="icon d-inline-block ion-md-close-circle-outline"></i>
+          </button>
+        </td>
+      </tr>
     );
   });
 
@@ -48,4 +66,15 @@ const OrderList = ({
   );
 }
 
-export default OrderList;
+const mapStateToProps = (state) => {
+  return ({
+    books: state.books,
+    cart: state.cart
+  })
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList);

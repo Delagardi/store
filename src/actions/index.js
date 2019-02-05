@@ -11,7 +11,7 @@ const booksLoaded = (newBooks) => {
   });
 }
 
-const onAddToCart = (id, price) => {
+const onAddToCart = (id) => {
   return ({
     type: 'ADD_BOOK_TO_CART',
     payload: id

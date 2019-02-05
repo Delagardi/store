@@ -30,7 +30,6 @@ class FrontpageContainer extends Component {
   }
   
   render() {
-    //const { onAddToCart } = this.props;
     const { books, loading, error } = this.props;
     
     if (loading) {
@@ -44,7 +43,6 @@ class FrontpageContainer extends Component {
     return <Frontpage books={books} />
   }
 }
-//onAddToCart={onAddToCart}              
 
 const mapStateToProps = ({ books, loading, error }) => {
   return {
@@ -56,7 +54,6 @@ const mapStateToProps = ({ books, loading, error }) => {
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  //const { onAddToCart, booksLoaded } = bindActionCreators(actions, dispatch);
   const { bookstoreService } = ownProps;
   
   return {

@@ -44,10 +44,10 @@ class FrontpageItem extends Component {
             <h3>{name}</h3>
           </Link>
           <span>{author}</span>
-          <span className="item-price d-block">{price}</span>
+          <span className="item-price d-block">${price}</span>
           <button 
             className="btn btn-success"
-            onClick={() => onAddToCart(id, price)}>Add to cart</button>
+            onClick={() => onAddToCart(id)}>Add to cart</button>
         </div>
       </div>
     );
@@ -62,8 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddToCart: (id, price) => {
-      return dispatch(onAddToCart(id, price))
+    onAddToCart: (id) => {
+      return dispatch(onAddToCart(id))
     }
   }
 }
