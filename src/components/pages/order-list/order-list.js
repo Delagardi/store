@@ -19,11 +19,10 @@ const OrderList = ({
     }
     const { name, price } = book;
     const priceSum = price * count;
-    index += 1;
 
     return (
       <tr key={id}>
-        <td>{index}</td>
+        <td>{index+1}</td>
         <td>{name}</td>
         <td>{count}</td>
         <td>${priceSum}</td>
@@ -59,7 +58,7 @@ const OrderList = ({
             <th>#</th>
             <th>Item</th>
             <th>Count</th>
-            <th>Price</th>
+            <th>Total price</th>
             <th>Action</th>
           </tr>
         </thead>

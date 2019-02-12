@@ -7,6 +7,11 @@ const initialState = {
   error: null,
 };
 
+// TO DO refactoring => functions from reducer
+const updateCartItems = (cart, item, index) => {
+
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_BOOKS_REQUEST':
