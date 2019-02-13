@@ -7,9 +7,35 @@ const initialState = {
   error: null,
 };
 
-// TO DO refactoring => functions from reducer
 const updateCartItems = (cart, item, index) => {
+  if (index === -1) {
+    return [
+      ...cart,
+      item
+    ]
+  }
 
+  return [
+    ...cart.slice(0, index),
+    item,
+    ...cart.slice(index+1)
+  ]
+}
+
+const updateCartItem = (book, item = {} ) => { // if item will be undefined we will give it empty object
+  const {
+    id = book.id,
+    name = book.name,
+    price = 0,
+    count = 0
+  } = item;
+
+  return {
+    id: id,
+    name: name,
+    price: price + book.price,
+    count: count + 1
+  };
 }
 
 const reducer = (state = initialState, action) => {
@@ -30,37 +56,48 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'ADD_BOOK_TO_CART':
-      const newCartItem = {
-        id: action.payload,
-        count: 1
-      }
+      const bookID = action.payload;
+      const book = state.books.find( (book) => book.id === bookID );
+      const itemIndex = state.cart.findIndex( (item) => item.id === bookID )
+      const item = state.cart[itemIndex];
 
-      let newCart = [
-        ...state.cart,
-        newCartItem
-      ]
-
-      const dublicateIndex = state.cart.findIndex( (item) => item.id === action.payload );
-
-      if (dublicateIndex >= 0 ) {
-        newCart = state.cart.map( 
-                          (cartItem) => cartItem.id === action.payload 
-                          ? { 
-                              ...cartItem, 
-                              count: cartItem.count + 1 
-                            } 
-                          : cartItem 
-                        )
-      }
-
-      const cartBook = state.books.find( (book) => book.id === action.payload );
-      
+      const newCartItem = updateCartItem(book, item);
       return {
         ...state,
-        cartQuantity: state.cartQuantity + 1,
-        cartSum: state.cartSum + cartBook.price,
-        cart: newCart
+        cart: updateCartItems(state.cart, newCartItem, itemIndex)
       }
+
+      // const newCartItem = {
+      //   id: action.payload,
+      //   count: 1
+      // }
+
+      // let newCart = [
+      //   ...state.cart,
+      //   newCartItem
+      // ]
+
+      // const dublicateIndex = state.cart.findIndex( (item) => item.id === action.payload );
+
+      // if (dublicateIndex >= 0 ) {
+      //   newCart = state.cart.map( 
+      //                     (cartItem) => cartItem.id === action.payload 
+      //                     ? { 
+      //                         ...cartItem, 
+      //                         count: cartItem.count + 1 
+      //                       } 
+      //                     : cartItem 
+      //                   )
+      // }
+
+      // const cartBook = state.books.find( (book) => book.id === action.payload );
+      
+      // return {
+      //   ...state,
+      //   cartQuantity: state.cartQuantity + 1,
+      //   cartSum: state.cartSum + cartBook.price,
+      //   cart: newCart
+      // }
     
     case 'REMOVE_BOOK_REQUEST': {
       const cartBook = state.books.find( (book) => book.id === action.payload );
