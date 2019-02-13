@@ -8,6 +8,14 @@ const initialState = {
 };
 
 const updateCartItems = (cart, item, index) => {
+
+  if (item.count === 0) {
+    return [
+      ...cart.slice(0, index),
+      ...cart.slice(index+1)
+    ]
+  }
+
   if (index === -1) {
     return [
       ...cart,
@@ -22,7 +30,7 @@ const updateCartItems = (cart, item, index) => {
   ]
 }
 
-const updateCartItem = (book, item = {} ) => { // if item will be undefined we will give it empty object
+const updateCartItem = (book, item = {}, quantity ) => { // if item will be undefined we will give it empty object
   const {
     id = book.id,
     name = book.name,
@@ -33,9 +41,25 @@ const updateCartItem = (book, item = {} ) => { // if item will be undefined we w
   return {
     id: id,
     name: name,
-    price: price + book.price,
-    count: count + 1,
+    price: price + quantity*book.price,
+    count: count + quantity,
   };
+}
+
+const updateOrder = (state, bookID, quantity) => {
+  const { books, cart, cartQuantity, cartSum } = state;
+
+  const book = books.find( (book) => book.id === bookID );
+  const itemIndex = cart.findIndex( (item) => item.id === bookID )
+  const item = cart[itemIndex];
+
+  const newCartItem = updateCartItem(book, item, quantity);
+  return {
+    ...state,
+    cart: updateCartItems(cart, newCartItem, itemIndex),
+    cartQuantity: cartQuantity + quantity,
+    cartSum: cartSum + quantity*book.price
+  }
 }
 
 const reducer = (state = initialState, action) => {
@@ -56,108 +80,15 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'ADD_BOOK_TO_CART':
-      const bookID = action.payload;
-      const book = state.books.find( (book) => book.id === bookID );
-      const itemIndex = state.cart.findIndex( (item) => item.id === bookID )
-      const item = state.cart[itemIndex];
-
-      const newCartItem = updateCartItem(book, item);
-      return {
-        ...state,
-        cart: updateCartItems(state.cart, newCartItem, itemIndex),
-        cartQuantity: state.cartQuantity + 1,
-        cartSum: state.cartSum + book.price
-      }
-
-      // const newCartItem = {
-      //   id: action.payload,
-      //   count: 1
-      // }
-
-      // let newCart = [
-      //   ...state.cart,
-      //   newCartItem
-      // ]
-
-      // const dublicateIndex = state.cart.findIndex( (item) => item.id === action.payload );
-
-      // if (dublicateIndex >= 0 ) {
-      //   newCart = state.cart.map( 
-      //                     (cartItem) => cartItem.id === action.payload 
-      //                     ? { 
-      //                         ...cartItem, 
-      //                         count: cartItem.count + 1 
-      //                       } 
-      //                     : cartItem 
-      //                   )
-      // }
-
-      // const cartBook = state.books.find( (book) => book.id === action.payload );
-      
-      // return {
-      //   ...state,
-      //   cartQuantity: state.cartQuantity + 1,
-      //   cartSum: state.cartSum + cartBook.price,
-      //   cart: newCart
-      // }
+      return updateOrder(state, action.payload, 1);
     
-    case 'REMOVE_BOOK_REQUEST': {
-      const cartBook = state.books.find( (book) => book.id === action.payload );
-
-      const newCart = state.cart.map( (cartItem) => {
-        if (cartItem.id === action.payload) {
-          if (cartItem.count > 1) {
-            return ({
-              ...cartItem, 
-              count: cartItem.count - 1 
-            })
-          } else {
-
-            const cartItemIndex = state.cart.findIndex( (item) => item.id === action.payload );
-
-            const newCart = [
-              ...state.cart.slice(0, cartItemIndex),
-              ...state.cart.slice(cartItemIndex+1)
-            ]
-
-            return {
-              ...state,
-              cartQuantity: state.cartQuantity - 1,
-              cartSum: state.cartSum - cartBook.price,
-              cart: newCart
-            }
-
-          }
-        } else {
-          return cartItem 
-        }
-      });
-
-      return {
-        ...state,
-        cartQuantity: state.cartQuantity - 1,
-        cartSum: state.cartSum - cartBook.price,
-        cart: newCart
-      }
-    }
+    case 'REMOVE_BOOK_REQUEST':
+      return updateOrder(state, action.payload, -1);
     
-    case 'DELETE_BOOK_REQUEST': {
-      const index = state.cart.findIndex( (item) => item.id === action.payload );
-      const indexBooks = state.books.findIndex( (book) => book.id === action.payload );
-      const newCartSum = state.cartSum - state.books[indexBooks].price * state.cart[index].count;
+    case 'DELETE_BOOK_REQUEST': 
+      const item = state.cart.find( (book) => book.id === action.payload );
       
-      const newCart = [
-        ...state.cart.slice(0, index),
-        ...state.cart.slice(index+1)
-      ]
-
-      return {
-        ...state,
-        cartSum: newCartSum,
-        cartQuantity: state.cartQuantity - state.cart[index].count,
-        cart: newCart
-      }
-    }
+      return updateOrder(state, action.payload, -1*item.count);
 
     
     case 'FETCH_BOOK_FAILURE':
