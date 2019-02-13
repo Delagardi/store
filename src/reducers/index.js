@@ -34,7 +34,7 @@ const updateCartItem = (book, item = {} ) => { // if item will be undefined we w
     id: id,
     name: name,
     price: price + book.price,
-    count: count + 1
+    count: count + 1,
   };
 }
 
@@ -64,7 +64,9 @@ const reducer = (state = initialState, action) => {
       const newCartItem = updateCartItem(book, item);
       return {
         ...state,
-        cart: updateCartItems(state.cart, newCartItem, itemIndex)
+        cart: updateCartItems(state.cart, newCartItem, itemIndex),
+        cartQuantity: state.cartQuantity + 1,
+        cartSum: state.cartSum + book.price
       }
 
       // const newCartItem = {
