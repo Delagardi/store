@@ -27,14 +27,14 @@ const booksError = (errorMessage) => {
 
 const onRemoveFromCart = (id) => {
   return ({
-    type: 'REMOVE_BOOK_REQUEST',
+    type: 'REMOVE_BOOK_FROM_CART',
     payload: id
   })
 }
 
 const onDeleteFromCart = (id) => {
   return ({
-    type: 'DELETE_BOOK_REQUEST',
+    type: 'DELETE_BOOK_FROM_CART',
     payload: id
   })
 }

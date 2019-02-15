@@ -71,10 +71,10 @@ const OrderList = ({
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ bookList: { books }, order: { cart } }) => {
   return ({
-    books: state.books,
-    cart: state.cart
+    books: books,
+    cart: cart
   })
 }
 

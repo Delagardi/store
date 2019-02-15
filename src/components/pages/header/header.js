@@ -21,10 +21,10 @@ const Header = ({ cartQuantity = 0, cartSum = 0 }) => {
   );
 }
 
-const MapStateToProps = (state) => {
+const MapStateToProps = ({ order: { cartQuantity, cartSum } }) => {
   return {
-    cartQuantity: state.cartQuantity,
-    cartSum: state.cartSum
+    cartQuantity: cartQuantity,
+    cartSum: cartSum
   };
 }
 

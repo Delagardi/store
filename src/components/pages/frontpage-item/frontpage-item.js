@@ -41,9 +41,9 @@ class FrontpageItem extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ bookList: { books } }) => {
   return {
-    books: state.books
+    books: books
   }
 }
 
