@@ -1,16 +1,3 @@
-const initialState = {
-  bookList: {
-    books: [],
-    loading: true,
-    error: null,
-  },
-  order: {
-    cart: [],
-    cartQuantity: 0,
-    cartSum: 0,
-  }
-};
-
 const updateCartItems = (cart, item, index) => {
 
   if (item.count === 0) {
@@ -75,6 +62,14 @@ const updateOrder = (state, bookID, quantity) => {
 }
 
 const updateBookList = (state, action) => {
+  if (state === undefined) {
+    return {
+      books: [],
+      loading: true,
+      error: null,
+    }
+  }
+
   switch(action.type) {
     case 'FETCH_BOOKS_REQUEST':
       return {
@@ -98,11 +93,19 @@ const updateBookList = (state, action) => {
       }
     
       default: 
-      return state;
+      return state.bookList;
   }
 }
 
 const updateShoppingCart = (state, action) => {
+  if (state === undefined) {
+    return {
+      cart: [],
+      cartQuantity: 0,
+      cartSum: 0,
+    }
+  }
+
   switch (action.type) {    
     case 'ADD_BOOK_TO_CART':
       return updateOrder(state, action.payload, 1);
@@ -116,31 +119,35 @@ const updateShoppingCart = (state, action) => {
       return updateOrder(state, action.payload, -1*item.count); 
     
     default: 
-      return state;
+      return state.order;
   }
 }
 
-const reducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'FETCH_BOOKS_REQUEST':
-    case 'FETCH_BOOKS_SUCCESS':
-    case 'FETCH_BOOK_FAILURE':
-      return {
-        ...state,
-        bookList: updateBookList(state, action)
-      }
-    
-    case 'ADD_BOOK_TO_CART':
-    case 'REMOVE_BOOK_FROM_CART':
-    case 'DELETE_BOOK_FROM_CART': 
-      return {
-        ...state,
-        order: updateShoppingCart(state, action)
-      }
-    
-    default: 
-      return state;
+const reducer = (state, action) => {
+  return {
+    bookList: updateBookList(state, action),
+    order: updateShoppingCart(state, action)
   }
+  // switch(action.type) {
+  //   case 'FETCH_BOOKS_REQUEST':
+  //   case 'FETCH_BOOKS_SUCCESS':
+  //   case 'FETCH_BOOK_FAILURE':
+  //     return {
+  //       ...state,
+  //       bookList: updateBookList(state, action)
+  //     }
+    
+  //   case 'ADD_BOOK_TO_CART':
+  //   case 'REMOVE_BOOK_FROM_CART':
+  //   case 'DELETE_BOOK_FROM_CART': 
+  //     return {
+  //       ...state,
+  //       order: updateShoppingCart(state, action)
+  //     }
+    
+  //   default: 
+  //     return state;
+  // }
 }
 
 export default reducer;
